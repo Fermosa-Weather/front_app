@@ -1,4 +1,4 @@
-// src/services/api.js
+// fronted/services/api.js
 export const fetchPrediction = async (futureDate) => {
     const requestOptions = {
         method: 'POST',
