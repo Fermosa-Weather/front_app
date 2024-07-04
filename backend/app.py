@@ -9,19 +9,19 @@ CORS(app)  # Habilitar CORS para todas las rutas
 
 # Cargar modelos
 model_temp = joblib.load('model_temp.pkl')
-model_precip = joblib.load('model_precip.pkl')
+model_precipitation = joblib.load('model_precipitation.pkl')
 model_humidity = joblib.load('model_humidity.pkl')
 model_wind_direction = joblib.load('model_wind_direction.pkl')
 
 models = {
     'temperatura': model_temp,
-    'precipitacion': model_precip,
+    'precipitacion': model_precipitation,
     'humedad': model_humidity,
     'direccion_viento': model_wind_direction
 }
 
 # Cargar datos
-file_path = 'RAFstationdata.json'
+file_path = './RAFstationdata.json'
 df = load_data_from_json(file_path)
 
 @app.route('/predict', methods=['POST'])
