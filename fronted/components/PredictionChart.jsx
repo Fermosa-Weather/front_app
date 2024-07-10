@@ -1,33 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 
-const PredictionChart = ({ data }) => {
-  if (!data || !data.length) {
+const PredictionChart = () => {
+  const [predictions, setPredictions] = useState([]);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchPredictions = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/predictions');
+        setPredictions(response.data);
+        setError('');
+      } catch (error) {
+        setError('Error al obtener datos del servidor');
+        setPredictions([]);
+      }
+    };
+
+    fetchPredictions();
+  }, []);
+
+  if (!predictions || !predictions.length) {
     return <p>No hay datos disponibles para mostrar.</p>;
   }
 
-  // Aquí puedes continuar con el renderizado del gráfico usando los datos
+  const data = {
+    labels: predictions.map(entry => entry.fecha),
+    datasets: [
+      {
+        label: 'Temperatura',
+        data: predictions.map(entry => entry.temperatura.toFixed(2)),
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        fill: true,
+      },
+      // Puedes agregar más datasets según los datos que quieras mostrar en el gráfico
+    ],
+  };
+
   return (
     <div className="prediction-chart">
-      <Line
-        data={{
-          labels: data.map(entry => entry.date),  // Ejemplo: Suponiendo que `date` es un campo en tu objeto de datos
-          datasets: [
-            {
-              label: 'Temperatura',
-              data: data.map(entry => entry.temperature),  // Ejemplo: Suponiendo que `temperature` es un campo en tu objeto de datos
-              borderColor: 'rgba(75, 192, 192, 1)',
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
-              fill: true,
-            },
-            // Aquí puedes agregar más datasets según los datos que quieras mostrar en el gráfico
-          ],
-        }}
-        options={{
-          responsive: true,
-          maintainAspectRatio: false,
-        }}
-      />
+      <h2>Predicción de Temperatura</h2>
+      <Line data={data} />
     </div>
   );
 };

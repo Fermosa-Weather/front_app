@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css'; // Archivo de estilos CSS local
 import PredictionForm from './components/PredictionForm.jsx';
-import PredictionChart from './components/PredictionChart.jsx';
 import axios from 'axios';
 
 const App = () => {
@@ -30,8 +29,7 @@ const App = () => {
 
       <PredictionForm />
 
-      {/* Pasar `predictions` como prop a PredictionChart */}
-      <PredictionChart data={predictions} />
+      {/* Puedes agregar otros componentes o funcionalidades aquí */}
     </div>
   );
 };

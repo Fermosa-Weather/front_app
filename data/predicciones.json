@@ -1,0 +1,11 @@
+[
+    {
+        "temperatura": 29.82202765924171,
+        "precipitacion": 1.5471733335424456,
+        "humedad": 56.07291702557833,
+        "direccion_viento": 170.94319249981302,
+        "descripcion_clima": "Caluroso",
+        "calidad_aire": 1.9321318797471028,
+        "fecha": "05-08-2024"
+    }
+]
