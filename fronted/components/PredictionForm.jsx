@@ -26,7 +26,7 @@ const PredictionForm = () => {
   return (
     <div className="prediction-form-container">
       <div className="prediction-form">
-        <h2 className="form-title">Predicción Meteorológica</h2>
+        <h2 className="form-title">Consulte el Tiempo a Futuro</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="futureDate">Ingrese una fecha futura (DD-MM-YYYY):</label>
@@ -39,7 +39,7 @@ const PredictionForm = () => {
               required
             />
           </div>
-          <button type="submit" className="submit-button">Predecir</button>
+          <button type="submit" className="submit-button">Hacer Predicciones a Futuro</button>
         </form>
       </div>
 

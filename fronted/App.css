@@ -1,14 +1,22 @@
 /* App.css */
+
+/* Estilos generales para la aplicación */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
-  font-family: Arial, sans-serif;
   text-align: center;
-  margin: 0 auto;
+  margin: 20px auto;
   padding: 20px;
   max-width: 900px; /* Limitar el ancho para mejor legibilidad */
 }
 
 .App-header {
-  background-color: #4CAF50;
+  background-color: #3498db;
   color: white;
   padding: 20px;
   border-radius: 5px;
@@ -17,6 +25,7 @@
 
 .App-header h1 {
   margin-bottom: 10px;
+  font-size: 32px;
 }
 
 .App-header p {
@@ -35,7 +44,7 @@
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #008CBA;
+  background-color: #2980b9;
   color: white;
   border: none;
   border-radius: 5px;
@@ -43,11 +52,67 @@
 }
 
 .App-buttons button:hover {
-  background-color: #005F6B;
+  background-color: #1a5276;
+}
+
+.News-widget {
+  margin-top: 40px;
+}
+
+.News-widget h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #34495e;
+}
+
+.News-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.News-item {
+  background-color: #ecf0f1;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.News-item:hover {
+  transform: translateY(-5px);
+}
+
+.News-image {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #bdc3c7;
+}
+
+.News-content {
+  padding: 10px;
+}
+
+.News-content h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #2c3e50;
+}
+
+.News-content p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #34495e;
 }
 
 @media (max-width: 600px) {
   .App-buttons {
     flex-direction: column;
+  }
+
+  .News-item {
+    width: 100%;
   }
 }

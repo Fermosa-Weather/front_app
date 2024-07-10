@@ -1,0 +1,18 @@
+[
+    {
+      "title": "Se esperan lluvias intensas en Las Lomitas",
+      "description": "Para este fin de semana se pronostican lluvias fuertes en Las Lomitas.",
+      "imageUrl": "/images/lluvias-lomitas.jpg"
+    },
+    {
+      "title": "Temperaturas extremas en la región",
+      "description": "Se prevén altas temperaturas durante los próximos días en toda la provincia.",
+      "imageUrl": "/images/temperaturas-extremas.jpg"
+    },
+    {
+      "title": "Alerta por ráfagas de viento",
+      "description": "Se emite alerta por ráfagas de viento en el noreste de la provincia.",
+      "imageUrl": "/images/alerta-rafagas.jpg"
+    }
+  ]
+  
