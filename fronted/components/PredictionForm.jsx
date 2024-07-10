@@ -25,18 +25,23 @@ const PredictionForm = () => {
 
   return (
     <div className="prediction-form-container">
-      <form className="prediction-form" onSubmit={handleSubmit}>
-        <label htmlFor="futureDate">Ingrese una fecha futura (DD-MM-YYYY):</label>
-        <input
-          type="text"
-          id="futureDate"
-          name="futureDate"
-          value={futureDate}
-          onChange={handleDateChange}
-          required
-        />
-        <button type="submit">Predecir</button>
-      </form>
+      <div className="prediction-form">
+        <h2 className="form-title">Predicción Meteorológica</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="futureDate">Ingrese una fecha futura (DD-MM-YYYY):</label>
+            <input
+              type="text"
+              id="futureDate"
+              name="futureDate"
+              value={futureDate}
+              onChange={handleDateChange}
+              required
+            />
+          </div>
+          <button type="submit" className="submit-button">Predecir</button>
+        </form>
+      </div>
 
       {error && <p className="error">{error}</p>}
 
@@ -51,7 +56,7 @@ const PredictionForm = () => {
           <p>Calidad del Aire: {predictions.calidad_aire.toFixed(2)}</p>
         </div>
       ) : (
-        <p>No hay datos disponibles para mostrar.</p>
+        <p className="no-data">No hay datos disponibles para mostrar.</p>
       )}
     </div>
   );

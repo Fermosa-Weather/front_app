@@ -1,0 +1,21 @@
+/* ModelPage.css */
+
+.model-page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #E0F7FA; /* Celeste claro */
+    border: 1px solid #B2EBF2; /* Borde azul claro */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  }
+  
+  .model-page-heading {
+    text-align: center;
+    color: #004D40; /* Verde oscuro */
+  }
+  
+  .model-page-content {
+    margin-top: 20px;
+  }
+  

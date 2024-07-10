@@ -1,35 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css'; // Archivo de estilos CSS local
-import PredictionForm from './components/PredictionForm.jsx';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const App = () => {
-  const [predictions, setPredictions] = useState([]);
+  const navigate = useNavigate();
 
-  // Función para obtener predicciones
-  const fetchPredictions = async (futureDate) => {
-    try {
-      const response = await axios.post('http://localhost:5000/predict', { future_date: futureDate });
-      setPredictions(response.data);
-    } catch (error) {
-      console.error('Error al obtener predicciones:', error);
-      setPredictions([]);
-    }
+  const goToModel = () => {
+    navigate('/model');
   };
 
-  // Llamar a la función de obtención de predicciones al montar el componente
-  useEffect(() => {
-    fetchPredictions('03-07-2024');  // Aquí deberías usar la fecha correcta o manejarla dinámicamente
-  }, []);  // Vacío para asegurar que se ejecute solo una vez al montar
+  const goToMaps = () => {
+    navigate('/maps');
+  };
+
+  const goToHome = () => {
+    navigate('/');
+  };
 
   return (
     <div className="App">
-      <h1>Red Agrometeorologicas de Formosa</h1>
-      <h2>Predicción Meteorológica</h2>
+      <header className="App-header">
+        <h1>RAF (Red Agrometeorológicas de Formosa)</h1>
+        <p>
+          Bienvenidos a la aplicación de predicción meteorológica de la Red Agrometeorológicas de Formosa. 
+          Aquí podrás obtener predicciones precisas del clima para fechas futuras, ayudándote a planificar y 
+          tomar decisiones informadas.
+        </p>
+      </header>
 
-      <PredictionForm />
-
-      {/* Puedes agregar otros componentes o funcionalidades aquí */}
+      <div className="App-buttons">
+        <button onClick={goToHome}>Inicio</button>
+        <button onClick={goToModel}>Ir al Modelo</button>
+        <button onClick={goToMaps}>Ir a Mapas</button>
+      </div>
     </div>
   );
 };
