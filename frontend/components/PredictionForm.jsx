@@ -48,7 +48,8 @@ const PredictionForm = () => {
       {predictions && Object.keys(predictions).length > 0 ? (
         <div className="predictions">
           <h3>Predicciones para {futureDate}:</h3>
-          <p>Temperatura: {predictions.temperatura.toFixed(2)} °C</p>
+          <p>Temperatura Máxima: {predictions.temperatura_max.toFixed(2)} °C</p>
+          <p>Temperatura Mínima: {predictions.temperatura_min.toFixed(2)} °C</p>
           <p>Precipitación: {predictions.precipitacion.toFixed(2)} mm</p>
           <p>Humedad: {predictions.humedad.toFixed(2)} %</p>
           <p>Dirección del Viento: {predictions.direccion_viento.toFixed(2)} grados</p>

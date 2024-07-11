@@ -1,12 +1,13 @@
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split, GridSearchCV
 import numpy as np
 import joblib
 import json
 import os
 from tkinter import *
-from tkinter import messagebox
-import random
+from tkinter import messagebox  
+import random 
 
 # Define 'features' globally for weather prediction
 features_weather = [
@@ -15,7 +16,7 @@ features_weather = [
     'Radiación solar [W/m2] - promedio',
     'Humedad relativa HC [%] - promedio',
     'Velocidad de Viento [m/s] - promedio',
-    'Dias desde la primera fecha'
+    'Dias desde la primera fecha' 
 ]
 
 def load_data_from_json(file_path):
@@ -57,24 +58,51 @@ def preprocess_data_weather(df):
 def train_models(X_train, y_train_temp, y_train_precipitation, y_train_humidity, y_train_wind_direction):
     print("Training models...")
 
+    # Define parameters for GridSearchCV
+    param_grid = {
+        'n_estimators': [50, 100, 150],
+        'max_depth': [None, 10, 20],
+        'min_samples_split': [2, 5],
+        'min_samples_leaf': [1, 2],
+        'max_features': ['auto', 'sqrt']
+    }
+
     # Initialize the RandomForestRegressor model
     model_temp = RandomForestRegressor(random_state=42)
-    model_temp.fit(X_train, y_train_temp)
-    print("Temperature model trained.")
 
-    model_precipitation = RandomForestRegressor(random_state=42)
+    # Initialize GridSearchCV
+    grid_temp = GridSearchCV(estimator=model_temp, param_grid=param_grid, cv=3, verbose=2, n_jobs=-1)
+
+    # Train the temperature model
+    grid_temp.fit(X_train, y_train_temp)
+    best_model_temp = grid_temp.best_estimator_
+    print("Best temperature model found.")
+
+    # Save the best temperature model in backend/model_temp.pkl
+    model_temp_path = os.path.join('backend', 'model_temp.pkl')
+    joblib.dump(best_model_temp, model_temp_path)
+    print(f"Temperature model saved in {model_temp_path}")
+
+    # Train models for the other variables
+    model_precipitation = RandomForestRegressor(random_state=42, max_features='sqrt')  # Correct max_features
     model_precipitation.fit(X_train, y_train_precipitation)
-    print("Precipitation model trained.")
+    model_precipitation_path = os.path.join('backend', 'model_precipitation.pkl')
+    joblib.dump(model_precipitation, model_precipitation_path)
+    print(f"Precipitation model saved in {model_precipitation_path}")
 
-    model_humidity = RandomForestRegressor(random_state=42)
+    model_humidity = RandomForestRegressor(random_state=42, max_features='sqrt')  # Correct max_features
     model_humidity.fit(X_train, y_train_humidity)
-    print("Humidity model trained.")
+    model_humidity_path = os.path.join('backend', 'model_humidity.pkl')
+    joblib.dump(model_humidity, model_humidity_path)
+    print(f"Humidity model saved in {model_humidity_path}")
 
-    model_wind_direction = RandomForestRegressor(random_state=42)
+    model_wind_direction = RandomForestRegressor(random_state=42, max_features='sqrt')  # Correct max_features
     model_wind_direction.fit(X_train, y_train_wind_direction)
-    print("Wind direction model trained.")
+    model_wind_direction_path = os.path.join('backend', 'model_wind_direction.pkl')
+    joblib.dump(model_wind_direction, model_wind_direction_path)
+    print(f"Wind direction model saved in {model_wind_direction_path}")
 
-    return model_temp, model_precipitation, model_humidity, model_wind_direction
+    return best_model_temp, model_precipitation, model_humidity, model_wind_direction
 
 def predict_future_weather(models, df, future_date):
     print(f"Predicting for the date {future_date}...")
@@ -92,40 +120,23 @@ def predict_future_weather(models, df, future_date):
     predictions = {}
 
     for key, model in models.items():
-        try:
-            # Prediction based on the model
-            prediction = model.predict(future_features)[0]
-            
-            # Adjust temperature prediction to a realistic range based on current July 2024 temperatures in Formosa
-            if key == 'temperatura':
-                prediction = random.uniform(12, 19)  # Adjusted to the observed range for July 2024
-            
-            # Add a random component to vary the predictions
-            random_factor = random.uniform(-2, 2)  # Random variability between -2 and 2
-            prediction += random_factor
-            
-            # Adjust precipitation prediction to ensure non-negative values
-            if key == 'precipitacion':
-                prediction = max(0, prediction)  # Ensure non-negative values
-            
-            # Assign predictions for temperatura_max and temperatura_min
-            if key == 'temperatura':
-                max_temp_prediction = prediction + random.uniform(1, 3)  # Example random value for max temperature
-                min_temp_prediction = max(0, prediction - random.uniform(1, 3))  # Example random value for min temperature
-                predictions['temperatura_max'] = max_temp_prediction
-                predictions['temperatura_min'] = min_temp_prediction
-            
-            if key != 'temperatura':  # Exclude 'temperatura' from final predictions
-                predictions[key] = prediction
+        # Prediction based on the model
+        prediction = model.predict(future_features)[0]
         
-        except Exception as e:
-            print(f"Error predicting {key}: {str(e)}")
-            predictions[key] = 0  # Set prediction to 0 or handle as needed
+        # Add a random component to vary the predictions
+        random_factor = random.uniform(-5, 5)  # Random variability between -5 and 5
+        prediction += random_factor
+        
+        # Adjust precipitation prediction to ensure non-negative values
+        if key == 'precipitacion':
+            prediction = max(0, prediction)  # Ensure non-negative values
+        
+        predictions[key] = prediction
     
     # Determine weather description
-    if predictions.get('temperatura_max', 0) >= 30:
+    if predictions['temperatura'] >= 30:
         predictions['descripcion_clima'] = 'Caluroso'
-    elif predictions.get('precipitacion', 0) > 0:
+    elif predictions['precipitacion'] > 0:
         predictions['descripcion_clima'] = 'Lluvioso'
     else:
         predictions['descripcion_clima'] = 'Nublado'
@@ -144,20 +155,8 @@ def save_predictions_to_json(predictions, future_date, file_name="predicciones.j
     file_path = os.path.join('backend', file_name)
     predictions['fecha'] = future_date
     
-    # Load previous predictions
-    previous_predictions = []
-    if os.path.exists(file_path):
-        with open(file_path, 'r') as json_file:
-            previous_predictions = json.load(json_file).get('ultimas_predicciones', [])
-
-    # Add current prediction to the list of previous predictions
-    if len(previous_predictions) >= 10:
-        previous_predictions.pop(0)  # Remove oldest prediction if more than 10
-    previous_predictions.append(predictions.copy())
-    
-    # Update JSON with latest predictions
     with open(file_path, 'w') as json_file:
-        json.dump({'ultimas_predicciones': previous_predictions}, json_file, indent=4)
+        json.dump(predictions, json_file, indent=4)
         json_file.write('\n')
     
     print(f"Predictions saved in {file_path}")
@@ -167,18 +166,13 @@ def main():
     df = load_data_from_json(file_path)
     X_weather, y_temp, y_precipitation, y_humidity, y_wind_direction = preprocess_data_weather(df)
 
-    # Train models
-    model_temp, model_precipitation, model_humidity, model_wind_direction = train_models(
-        X_weather, y_temp, y_precipitation, y_humidity, y_wind_direction
-    )
+    X_train_temp, X_test_temp, y_train_temp, y_test_temp = train_test_split(X_weather, y_temp, test_size=0.2, random_state=42)
+    X_train_precip, X_test_precip, y_train_precipitation, y_test_precipitation = train_test_split(X_weather, y_precipitation, test_size=0.2, random_state=42)
+    X_train_humidity, X_test_humidity, y_train_humidity, y_test_humidity = train_test_split(X_weather, y_humidity, test_size=0.2, random_state=42)
+    X_train_wind_dir, X_test_wind_dir, y_train_wind_direction, y_test_wind_direction = train_test_split(X_weather, y_wind_direction, test_size=0.2, random_state=42)
 
-    # Save the models
-    models = {
-        'temperatura': model_temp,
-        'precipitacion': model_precipitation,
-        'humedad': model_humidity,
-        'direccion_viento': model_wind_direction
-    }
+    models = {}
+    models['temperatura'], models['precipitacion'], models['humedad'], models['direccion_viento'] = train_models(X_train_temp, y_train_temp, y_train_precipitation, y_train_humidity, y_train_wind_direction)
 
     root = Tk()
     root.title("Weather Prediction")
@@ -191,13 +185,16 @@ def main():
             save_predictions_to_json(predictions, future_date)
             messagebox.showinfo("Prediction Results", f"Predictions saved successfully!\n\n{predictions}")
         except Exception as e:
-            messagebox.showerror("Prediction Error", f"Error predicting weather: {str(e)}")
+            messagebox.showerror("Error", f"Failed to predict: {str(e)}")
 
-    Label(root, text="Enter future date (dd-mm-yyyy):").pack(pady=10)
+    label = Label(root, text="Enter future date (DD-MM-YYYY): ")
+    label.pack(pady=10)
+
     entry = Entry(root, width=20)
-    entry.pack(pady=10)
+    entry.pack()
 
-    Button(root, text="Predict and Save", command=predict_and_save).pack(pady=10)
+    predict_button = Button(root, text="Predict", command=predict_and_save)
+    predict_button.pack(pady=10)
 
     root.mainloop()
 

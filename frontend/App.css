@@ -1,5 +1,3 @@
-/* App.css */
-
 /* Estilos generales para la aplicación */
 body {
   font-family: 'Roboto', sans-serif;
@@ -8,11 +6,22 @@ body {
   padding: 0;
 }
 
+.background-container {
+  background: linear-gradient(to bottom, #aed6f1, #4a90e2); /* Gradiente azul celeste */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .App {
   text-align: center;
   margin: 20px auto;
   padding: 20px;
   max-width: 900px; /* Limitar el ancho para mejor legibilidad */
+  background-color: #f0f7ff; /* Fondo celeste */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
 .App-header {

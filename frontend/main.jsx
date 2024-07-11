@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import App from './App.jsx';
 import ModelPage from './pages/ModelPage.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 //import MapsPage from './pages/MapsPage.jsx'; 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

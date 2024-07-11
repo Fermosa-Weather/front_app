@@ -1,0 +1,43 @@
+[
+  {
+    "title": "Se esperan lluvias intensas en Las Lomitas",
+    "description": "Para este fin de semana se pronostican lluvias fuertes en Las Lomitas.",
+    "imageUrl": "/images2/laslomitas.jpg"
+  },
+  {
+    "title": "En la capital formoseña el clima seguirá frío para los próximos días",
+    "description": "Se prevén bajas temperaturas durante los próximos días en la ciudad.",
+    "imageUrl": ""
+  },
+  {
+    "title": "Alerta por ráfagas de viento en Clorinda",
+    "description": "Se emite alerta por ráfagas de viento en Clorinda y sus alrededores.",
+    "imageUrl": "/images/alerta-rafagas.jpg"
+  },
+  {
+    "title": "Nuevo frente frío en Ibarreta",
+    "description": "Un nuevo frente frío ingresará a Ibarreta la próxima semana.",
+    "imageUrl": "/images/frente-frio.jpg"
+  },
+  {
+    "title": "Incendios forestales en la zona sur de Herradura",
+    "description": "Se registran incendios forestales en la zona sur de Herradura debido a la sequía.",
+    "imageUrl": "/images/incendios-forestales.jpg"
+  },
+  {
+    "title": "Inundaciones en áreas rurales de Palo Santo",
+    "description": "Las últimas lluvias han provocado inundaciones en varias áreas rurales de Palo Santo.",
+    "imageUrl": "/images/inundaciones.jpg"
+  },
+  {
+    "title": "Ola de calor en General Belgrano",
+    "description": "Se esperan temperaturas extremadamente altas en General Belgrano para los próximos días.",
+    "imageUrl": "/images/temperaturas-extremas.jpg"
+  },
+ 
+  {
+    "title": "Sequía severa en Comandante Fontana",
+    "description": "La región de Comandante Fontana está experimentando una sequía severa.",
+    "imageUrl": "/images/sequia.jpg"
+  }
+]

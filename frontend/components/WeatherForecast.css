@@ -1,0 +1,109 @@
+/* Estilos generales del contenedor de pronóstico */
+.weather-forecast-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f0f8ff; /* Celeste claro */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #333; /* Color de texto oscuro */
+}
+
+/* Título del pronóstico */
+.forecast-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #ff6347; /* Rojo coral */
+}
+
+/* Contenedor del slider */
+.slider-wrapper {
+  margin-top: 20px;
+}
+
+/* Estilos para cada slide del slider */
+.slider-wrapper .slick-slide {
+  padding: 0 10px;
+}
+
+/* Tarjeta de pronóstico individual */
+.card {
+  background-color: #ffffff; /* Fondo blanco para las tarjetas */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+/* Título de la tarjeta */
+.card-title {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Texto de temperatura */
+.temperature .card-text {
+  color: #333;
+}
+
+/* Mensaje cuando no hay datos */
+.no-data {
+  font-size: 16px;
+  color: #333;
+  margin-top: 20px;
+}
+
+/* Estilos para las flechas del slider */
+.slick-prev,
+.slick-next {
+  color: transparent; /* Hace que el texto de las flechas sea transparente */
+  font-size: 20px; /* Tamaño de fuente de las flechas */
+  line-height: 1; /* Ajusta el espaciado vertical */
+  z-index: 1; /* Asegura que las flechas estén sobre las tarjetas */
+}
+
+/* Iconos de flechas */
+.slick-prev:before,
+.slick-next:before {
+  color: #000000; /* Color negro para los íconos de flecha */
+}
+
+/* Cambiar el color de fondo de las flechas al pasar el mouse */
+.slick-prev:hover,
+.slick-next:hover {
+  color: #cccccc; /* Color gris claro al pasar el mouse */
+}
+
+/* Cambiar el color de los íconos de flecha al pasar el mouse */
+.slick-prev:hover:before,
+.slick-next:hover:before {
+  color: #cccccc; /* Color gris claro para los íconos al pasar el mouse */
+}
+
+/* Ajuste de tamaño para la imagen del clima */
+.weather-icon {
+  max-width: 50px; /* Ajusta el tamaño máximo según sea necesario */
+  height: auto; /* Mantiene la proporción de aspecto */
+  display: block; /* Asegura que la imagen no se superponga con el texto */
+  margin-top: 10px; /* Ajusta el margen superior según sea necesario */
+}
+
+/* Media queries para ajustar el diseño en pantallas más pequeñas */
+@media screen and (max-width: 768px) {
+  .weather-forecast-container {
+    padding: 10px;
+  }
+  
+  .card-title {
+    font-size: 16px;
+  }
+  
+  .no-data {
+    font-size: 14px;
+  }
+}

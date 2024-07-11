@@ -1,0 +1,37 @@
+.News-widget {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .News-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .News-item {
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: calc(33% - 40px); /* Ajusta el ancho de las tarjetas */
+    flex: 1 0 calc(33% - 40px); /* Permite 3 elementos por fila */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .News-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .News-content {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
