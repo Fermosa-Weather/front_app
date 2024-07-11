@@ -1,5 +1,5 @@
 import React from 'react';
-import './NewsWidget.css'; // Importa los estilos CSS específicos para este componente
+import '../styles/NewsWidget.css'; 
 import lasLomitasImage from '../images2/laslomitas.jpg';
 import capitalImage from '../images2/ciudadformosa.jfif';
 import alertaRafagasImage from '../images2/clorinda.jpg';

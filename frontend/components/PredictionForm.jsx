@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './PredictionForm.css'; // Archivo de estilos CSS local
+import '../styles/PredictionForm.css'; 
 
 const PredictionForm = () => {
   const [futureDate, setFutureDate] = useState('');

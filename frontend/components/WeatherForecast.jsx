@@ -3,7 +3,7 @@ import axios from 'axios';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import './WeatherForecast.css'; // Estilos CSS local para el componente
+import '../styles/WeatherForecast.css';
 
 // Importar las imágenes de los íconos de clima
 import rainyIcon from '../images/rainy-day.png';
