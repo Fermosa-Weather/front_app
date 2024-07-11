@@ -1,42 +1,41 @@
-/* Estilos para el formulario de predicción */
-
 .prediction-form-container {
-  text-align: center;
-  margin: 20px auto;
+  background: rgba(255, 255, 255, 0.2); /* Fondo semi-transparente */
+  border-radius: 5px;
+  backdrop-filter: blur(1px); /* Efecto de desenfoque para un fondo translúcido */
   padding: 20px;
-  max-width: 600px; /* Limitar el ancho para mejor legibilidad */
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: center;
+}
+
+.prediction-form {
   background-color: #f0f7ff; /* Fondo celeste */
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  padding: 20px;
 }
 
 .form-title {
   margin-bottom: 20px;
-  color: #3498db;
-}
-
-.prediction-form form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .form-group {
   margin-bottom: 20px;
+  text-align: left;
 }
 
 .form-group label {
+  display: block;
   font-size: 18px;
-  color: #2c3e50;
+  margin-bottom: 5px;
 }
 
 .form-group input[type='text'] {
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: 1px solid #bdc3c7;
   border-radius: 5px;
-  outline: none;
+  border: 1px solid #ccc;
 }
 
 .submit-button {
@@ -55,29 +54,36 @@
 }
 
 .error {
-  color: #c0392b;
-  font-size: 14px;
+  color: #e74c3c;
+  font-size: 16px;
   margin-top: 10px;
 }
 
 .predictions {
   margin-top: 20px;
-  text-align: left;
+  padding: 20px; /* Aumenta el espacio interior del contenedor de predicciones */
+  background-color: #fff; /* Fondo blanco */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
 .predictions h3 {
-  font-size: 20px;
   margin-bottom: 10px;
-  color: #3498db;
 }
 
 .predictions p {
   font-size: 16px;
-  line-height: 1.5;
-  color: #2c3e50;
+  margin-bottom: 5px;
 }
 
 .no-data {
   font-size: 16px;
-  color: #2c3e50;
+  color: #7f8c8d;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .predictions {
+    padding: 10px;
+  }
 }

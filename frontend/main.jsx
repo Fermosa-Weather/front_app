@@ -1,19 +1,17 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import App from './App.jsx';
-import ModelPage from './pages/ModelPage.jsx';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './App.jsx'; // Asumiendo que App.jsx está en el mismo directorio y se importa así
 
-//import MapsPage from './pages/MapsPage.jsx'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/model" element={<ModelPage />} />
+        <Route path="/prediction" element={<App />} /> {/* Ruta para App */}
       </Routes>
     </Router>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
